@@ -1,6 +1,7 @@
 // Add imports above this line
-import { galleryItems } from './gallery-items';
 import SimpleLightbox from 'simplelightbox';
+import { galleryItems } from './gallery-items';
+
 import 'simplelightbox/dist/simple-lightbox.min.css';
 // Change code below this line
 
@@ -17,9 +18,10 @@ galleryItems.forEach(({ preview, original, description }) => {
 </a>`
   );
 });
-galleryEl.insertAdjacentHTML('beforeend', galleryItemsArray.join(''));тзь
+galleryEl.insertAdjacentHTML('beforeend', galleryItemsArray.join(''));
 
 const lightbox = new SimpleLightbox('.gallery a', {
   captionsData: 'alt',
+  captionType: 'alt',
   captionDelay: 250,
 });

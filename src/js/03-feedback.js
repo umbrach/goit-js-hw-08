@@ -1,48 +1,41 @@
 import throttle from 'lodash.throttle';
 
-const MASSAGE_KEY = 'feedback-form-state';
+const formEl = document.querySelector('form');
+const inputEl = document.querySelector('input');
+const textareaEl = document.querySelector('textarea');
 
-const refs = {
-  form: document.querySelector('.feedback-form'),
-  input: document.querySelector('.feedback-form input'),
-  textarea: document.querySelector('.feedback-form textarea'),
-};
+formEl.addEventListener('submit', onFormSubmit);
+formEl.addEventListener('input', throttle(onFormInput, 500));
 
-refs.form.addEventListener('submit', onFormSubmit);
-refs.input.addEventListener('input', throttle(onEmailInput, 500));
-refs.textarea.addEventListener('input', throttle(onTextareaInput, 500));
+const MESSAGE_KEY = 'feedback-form-state';
+
+const inputObj = {};
+const storageObj = { email: '', message: '' };
 
 populateTextarea();
-populateEmail();
 
 function onFormSubmit(element) {
   element.preventDefault();
-    element.target.reset();
-    localStorage.removeItem(MASSAGE_KEY);
-}
-
-function onEmailInput(element) {
-    const email = element.target.value;
-    localStorage.setItem(MASSAGE_KEY, email);
-    console.log(email)
-}
-
-function populateEmail() {
-  const savedEmail = localStorage.getItem(MASSAGE_KEY);
-  if (savedEmail) {
-    refs.input.value = savedEmail;
+  element.target.reset();
+  const savedObj = JSON.parce(localStorage.getItem(MESSAGE_KEY));
+  if (localStorage.getItem(MESSAGE_KEY)) {
+    console.log(savedObj);
+  } else {
+    console.log(storageObj);
   }
+  localStorage.removeItem(MESSAGE_KEY);
 }
 
-function onTextareaInput(element) {
-  const message = element.target.value;
-    localStorage.setItem(MASSAGE_KEY, message);
-    console.log(message);
+function onFormInput(element) {
+  inputObj[element.target.name] = element.target.value;
+  localStorage.setItem(MASSAGE_KEY, email);
+  console.log(email);
 }
 
 function populateTextarea() {
-  const savedMessage = localStorage.getItem(MASSAGE_KEY);
+  const savedMessage = JSON.parce(localStorage.getItem(MASSAGE_KEY));
   if (savedMessage) {
-    refs.textarea.value = savedMessage;
+    inputEl.value = savedMessage['email'] || '';
+    textareaEl.value = savedMessage['email'] || '';
   }
 }

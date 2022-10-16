@@ -28,12 +28,12 @@ function onFormSubmit(element) {
 
 function onFormInput(element) {
   inputObj[element.target.name] = element.target.value;
-  localStorage.setItem(MASSAGE_KEY, email);
-  console.log(email);
+  const stringKey = JSON.stringify(inputObj);
+  localStorage.setItem(MESSAGE_KEY, stringKey);
 }
 
 function populateTextarea() {
-  const savedMessage = JSON.parce(localStorage.getItem(MASSAGE_KEY));
+  const savedMessage = JSON.parce(localStorage.getItem(MESSAGE_KEY));
   if (savedMessage) {
     inputEl.value = savedMessage['email'] || '';
     textareaEl.value = savedMessage['email'] || '';

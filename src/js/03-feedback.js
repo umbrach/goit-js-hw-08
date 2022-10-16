@@ -16,7 +16,7 @@ populateTextarea();
 
 function onFormSubmit(element) {
   element.preventDefault();
-  element.target.reset();
+  element.currentTarget.reset();
   const savedObj = JSON.parse(localStorage.getItem(MESSAGE_KEY));
   if (localStorage.getItem(MESSAGE_KEY)) {
     console.log(savedObj);
@@ -36,6 +36,6 @@ function populateTextarea() {
   const savedMessage = JSON.parse(localStorage.getItem(MESSAGE_KEY));
   if (savedMessage) {
     inputEl.value = savedMessage['email'] || '';
-    textareaEl.value = savedMessage['email'] || '';
+    textareaEl.value = savedMessage['message'] || '';
   }
 }
